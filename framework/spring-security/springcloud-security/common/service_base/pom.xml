@@ -12,8 +12,10 @@
     <artifactId>service_base</artifactId>
     <description>utils service</description>
     <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
+        <java.version>16</java.version>
+        <maven.compiler.source>16</maven.compiler.source>
+        <maven.compiler.target>16</maven.compiler.target>
+        <maven.compiler.compilerVersion>16</maven.compiler.compilerVersion>
     </properties>
 
 </project>

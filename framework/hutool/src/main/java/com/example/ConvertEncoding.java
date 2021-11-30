@@ -13,7 +13,7 @@ import java.util.Objects;
 public class ConvertEncoding {
 
     public static void main(String[] args) {
-        convertCharset("F:\\eclipse_Mars\\base", Charset.forName("GBK"), StandardCharsets.UTF_8, "java");
+        convertCharset("..//", Charset.forName("GBK"), StandardCharsets.UTF_8, "java");
 
     }
 
