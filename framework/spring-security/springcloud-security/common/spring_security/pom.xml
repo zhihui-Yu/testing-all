@@ -19,22 +19,11 @@
         <maven.compiler.compilerVersion>16</maven.compiler.compilerVersion>
     </properties>
 
-
     <dependencies>
         <dependency>
             <groupId>com.test</groupId>
             <artifactId>service_base</artifactId>
             <version>1.0.0</version>
-        </dependency>
-        <!-- Spring Security依赖 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt</artifactId>
         </dependency>
     </dependencies>
 </project>

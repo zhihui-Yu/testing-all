@@ -24,25 +24,34 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.test</groupId>
+            <artifactId>spring_security</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
             <artifactId>service_base</artifactId>
             <groupId>com.test</groupId>
             <version>1.0.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+
         <!--服务注册-->
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
+            <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
         <!--服务调用-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
         <!--mybatis-plus-->
@@ -71,11 +80,6 @@
             <artifactId>velocity-engine-core</artifactId>
         </dependency>
 
-        <!--lombok用来简化实体类：需要安装lombok插件-->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
         <!--gson-->
         <dependency>
             <groupId>com.google.code.gson</groupId>
