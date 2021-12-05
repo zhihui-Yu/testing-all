@@ -11,13 +11,15 @@ import java.util.Map;
  * @author simple
  */
 public class Day03 {
+    private static final String PATH = "C:\\Users\\Administrator\\IdeaProjects\\testing-all\\wroking-demo\\src\\main\\resources\\day03.txt";
     public static void main(String[] args) throws IOException {
         Map<Integer, Integer> map = new HashMap<>();
         int count = 0;
-        try (var reader = new BufferedReader(new InputStreamReader(new FileInputStream("C:\\Users\\simple\\IdeaProjects\\testing-all\\wroking-demo\\src\\main\\resources\\day03.txt")))) {
-            while (reader.readLine() != null) {
+        try (var reader = new BufferedReader(new InputStreamReader(new FileInputStream(PATH)))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
                 count++;
-                char[] chars = reader.readLine().toCharArray();
+                char[] chars = line.toCharArray();
                 if (map.isEmpty()) {
                     for (int i = 0; i < chars.length; i++) {
                         map.put(i, chars[i] - '0');
