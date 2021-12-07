@@ -10,6 +10,8 @@ import java.util.TreeSet;
  * @author simple
  */
 public class day06_2_2 {
+    public static final Map<String, Long> map = new HashMap<>();
+
     public static void main(String[] args) throws IOException {
         Map<Integer, Integer> fishMap = new HashMap<>();
         try (var reader = FileReader.reader("day06_2.txt")) {
@@ -31,16 +33,19 @@ public class day06_2_2 {
         }
         System.out.println(res);
 
-//         System.out.println(count(150, 1));
+//        System.out.println(count(257, 1));
     }
 
     public static long count(int day, int initialTimer) {
+        if (map.get(day + "-" + initialTimer) != null) return map.get(day + "-" + initialTimer);
 //        if (initialTimer + 2 > day) return 1;
         Set<Integer> babyDays = calc(day, initialTimer);
         long count = 1;
         for (var d : babyDays) {
             count += count(day - d + 1, 8);
         }
+        System.out.println("day: " + day + ", count: " + count);
+        map.put(day + "-" + initialTimer, count);
         return count;
     }
 
