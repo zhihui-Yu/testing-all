@@ -18,6 +18,7 @@ public class day06_2 {
         }
         var all = new ArrayList<List<Fish>>();
         all.add(fishList);
+        // 当 size = 220 && 堆内存设置10g，超出。
         for (int i = 0; i < 200; i++) {
             List<List<Fish>> overall = new LinkedList<>();
             for (var list : all) {
@@ -31,7 +32,7 @@ public class day06_2 {
                     }
                 }
                 if (!tmp.isEmpty()) list.addAll(tmp);
-                if (list.size() > 1000 * 1000 * 1000) {
+                if (list.size() > 100 * 1000 * 1000) {
                     for (int j = 0; j < list.size(); j++) {
                         over.add(list.get(i));
                         list.remove(i);

@@ -9,15 +9,15 @@ import java.util.List;
 public class day06_1 {
     public static void main(String[] args) throws Exception {
         List<Fish> fishList = new LinkedList<>();
-        try (var reader = FileReader.reader("day06_1.txt")) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                for (var num : line.split(",")) {
-                    fishList.add(new Fish(Integer.parseInt(num)));
-                }
-            }
-        }
-
+//        try (var reader = FileReader.reader("day06_1.txt")) {
+//            String line;
+//            while ((line = reader.readLine()) != null) {
+//                for (var num : line.split(",")) {
+//                    fishList.add(new Fish(Integer.parseInt(num)));
+//                }
+//            }
+//        }
+        fishList.add(new Fish(1));
         for (int i = 0; i < 80; i++) {
             List<Fish> tmp = new LinkedList<>();
             for (var fish : fishList) {
