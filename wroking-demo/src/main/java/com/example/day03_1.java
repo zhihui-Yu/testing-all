@@ -10,7 +10,7 @@ import java.util.Map;
 /**
  * @author simple
  */
-public class Day03 {
+public class day03_1 {
     private static final String PATH = "C:\\Users\\Administrator\\IdeaProjects\\testing-all\\wroking-demo\\src\\main\\resources\\day03.txt";
     public static void main(String[] args) throws IOException {
         Map<Integer, Integer> map = new HashMap<>();
