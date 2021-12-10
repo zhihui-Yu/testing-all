@@ -7,8 +7,17 @@ public class day08_1 {
         // 算出模式
         // 计算 | 后的数字表示
         // 符合条件的数字有多少·
-        try (var reader = FileReader.reader("day09_1.txt")) {
-
+        int count = 0;
+        try (var reader = FileReader.reader("day08_1.txt")) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                for (var str : line.split("\s+")) {
+                    if (str.length() == 2 || str.length() == 3 || str.length() == 4 || str.length() == 7) {
+                        count++;
+                    }
+                }
+            }
         }
+        System.out.println(count);
     }
 }
