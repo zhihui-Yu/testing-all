@@ -33,7 +33,9 @@ public class MyClient {
             //连接服务端
             ChannelFuture channelFuture = bootstrap.connect("127.0.0.1", 6666).sync();
             //对通道关闭进行监听
-            channelFuture.channel().closeFuture().sync();
+            channelFuture.channel().closeFuture().addListener((future) -> {
+                System.out.println("close this.");
+            }).sync();
         } finally {
             //关闭线程组
             eventExecutors.shutdownGracefully();

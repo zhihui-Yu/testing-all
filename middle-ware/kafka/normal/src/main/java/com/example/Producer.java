@@ -20,10 +20,23 @@ public class Producer {
         try (KafkaProducer<String, String> kafkaProducer = new KafkaProducer<>(props)) {
             while (true) {
                 String msg = "Hello," + new Random().nextInt(100);
-                ProducerRecord<String, String> record = new ProducerRecord<>(Topics.TOPIC_TEST, 2,"1", msg);
-                kafkaProducer.send(record);
-                System.out.println("消息发送成功:" + msg);
-                Thread.sleep(3000);
+//                ProducerRecord<String, String> record = new ProducerRecord<>(Topics.TOPIC_TEST,  msg);
+//                ProducerRecord<String, String> record1 = new ProducerRecord<>(Topics.TOPIC_TEST1,  msg);
+//                ProducerRecord<String, String> record2 = new ProducerRecord<>(Topics.TOPIC_TEST2,  msg);
+//                ProducerRecord<String, String> record3 = new ProducerRecord<>(Topics.TOPIC_TEST3,  msg);
+//                ProducerRecord<String, String> record4 = new ProducerRecord<>(Topics.TOPIC_TEST4,  msg);
+                ProducerRecord<String, String> record6 = new ProducerRecord<>(Topics.TOPIC_TEST6, 0, null, msg);
+                kafkaProducer.send(record6);
+//                System.out.println("消息发送成功:" + msg);
+//                kafkaProducer.send(record1);
+//                System.out.println("1-消息发送成功:" + msg);
+//                kafkaProducer.send(record2);
+//                System.out.println("2-消息发送成功:" + msg);
+//                kafkaProducer.send(record3);
+//                System.out.println("3-消息发送成功:" + msg);
+//                kafkaProducer.send(record4);
+//                System.out.println("4-消息发送成功:" + msg);
+                Thread.sleep(100);
             }
         }
 

@@ -2,8 +2,8 @@ package com.sk.server.controller;
 
 import com.sk.model.entity.ItemKill;
 import com.sk.server.service.ItemService;
-import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
-import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -21,6 +20,7 @@ import java.util.List;
  * @Version 1.0
  */
 @Controller
+@RequestMapping()
 public class ItemController {
     private static final Logger log = LoggerFactory.getLogger(ItemController.class);
 
@@ -31,25 +31,26 @@ public class ItemController {
 
     /**
      * 返回请求页面
+     *
      * @param page
      * @return
      */
     @RequestMapping("{page}")
-    public String page(@PathVariable String page){
+    public String page(@PathVariable String page) {
         return page;
     }
 
     /**
      * 获取秒杀商品列表
      */
-    @RequestMapping(value = {"/","/index",prefix+"/list",prefix+"/index.html"},method = RequestMethod.GET)
+    @RequestMapping(value = {"/", "/index", prefix + "/list", prefix + "/index.html"}, method = RequestMethod.GET)
     public String list(ModelMap modelMap) {
-        try{
+        try {
             //获取代秒杀商品列表
             List<ItemKill> list = itemServiceImpl.getKillItems();
-            modelMap.put("list",list);
-            log.info("获取秒杀商品列表-数据：{}",list);
-        }catch (Exception e){
+            modelMap.put("list", list);
+            log.info("获取秒杀商品列表-数据：{}", list);
+        } catch (Exception e) {
             log.error("获取秒杀商品列表-发生异常");
             return "redirect:error";
         }
@@ -58,25 +59,26 @@ public class ItemController {
 
     /**
      * 查看商品详情
-     * @param id 商品id
+     *
+     * @param id       商品id
      * @param modelMap 页面渲染
-     * @param session 会话
+     * @param session  会话
      * @return
      */
-    @RequestMapping(value = prefix+"/detail/{id}",method = RequestMethod.GET)
-    public String detail(@PathVariable Integer id, ModelMap modelMap,HttpSession session){
+    @RequestMapping(value = prefix + "/detail/{id}", method = RequestMethod.GET)
+    public String detail(@PathVariable Integer id, ModelMap modelMap, HttpSession session) {
         Object uid = session.getAttribute("uid");
-        if(uid == null){
+        if (uid == null) {
             return "redirect:/unauth";
         }
-        if(id == null || id < 0){
+        if (id == null || id < 0) {
             return "redirect:base";
         }
 
         try {
-            modelMap.put("detail",itemServiceImpl.getKillDetail(id));
-        }catch (Exception e ){
-            log.error("获取待秒杀商品详情--发生异常：id={}",id,e.getStackTrace());
+            modelMap.put("detail", itemServiceImpl.getKillDetail(id));
+        } catch (Exception e) {
+            log.error("获取待秒杀商品详情--发生异常：id={}", id, e.getStackTrace());
             return "error";
         }
         return "info";

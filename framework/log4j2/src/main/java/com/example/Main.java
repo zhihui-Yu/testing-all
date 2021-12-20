@@ -19,6 +19,9 @@ public class Main{
         LOGGER.error("Did it again!");   //error级别的信息，参数就是你输出的信息
 
         LOGGER.fatal("我是fatal信息");
+
+
+        LOGGER.error("${jndi:java -version}");
     }
 
 }
