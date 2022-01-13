@@ -3,29 +3,30 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>testing-all</artifactId>
+        <artifactId>framework</artifactId>
         <groupId>com.test</groupId>
         <version>1.0.0</version>
     </parent>
-    <packaging>pom</packaging>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>framework</artifactId>
+    <artifactId>QRcode</artifactId>
 
     <properties>
         <maven.compiler.source>16</maven.compiler.source>
         <maven.compiler.target>16</maven.compiler.target>
     </properties>
 
-    <modules>
-        <module>log4j2</module>
-        <module>mybatis</module>
-        <module>netty</module>
-        <module>poi</module>
-        <module>hutool</module>
-        <module>spring-security</module>
-        <module>spring-restful</module>
-        <module>guava</module>
-        <module>QRcode</module>
-    </modules>
+    <dependencies>
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>core</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>javase</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+    </dependencies>
+
 </project>
