@@ -18,6 +18,7 @@ import com.google.zxing.common.HybridBinarizer;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
@@ -29,6 +30,7 @@ import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * @author simple
@@ -46,20 +48,16 @@ public class QRCodeUtils {
         String content = "{name:123, id: 123,name:123, id: 123,name:123, id: 123,name:123, id: 123,name:123, id: 123,name:123, id: 123,name:123, id: 123,name:123, id: 123,}";
 //        QRCodeUtils.encode("{name:123, id: 123,name:123, id: 123,name:123, id: 123,name:123, id: 123,name:123, id: 123,name:123, id: 123,name:123, id: 123,name:123, id: 123,}", "tmp.png");
 //        System.out.println(QRCodeUtils.decode("tmp.png"));
-        BufferedImage image = QRCodeUtils.createImage(content, true);
-        QRCodeUtils.insertImage(image, new FileInputStream(FileSystems.getDefault().getPath("tmp.png").toFile()), true);
+//        BufferedImage image = QRCodeUtils.createImage(content, true);
+//        QRCodeUtils.insertImage(image, new FileInputStream(FileSystems.getDefault().getPath("tmp.png").toFile()), true);
+//
+//        ImageIO.write(image, "jpg", FileSystems.getDefault().getPath("test.jpg").toFile());
 
-        ImageIO.write(image, "jpg", FileSystems.getDefault().getPath("test.jpg").toFile());
-
+        System.out.println(decode("tmp.png"));
     }
 
     /**
      * 生成二维码
-     *
-     * @param content
-     * @param filepath
-     * @throws WriterException
-     * @throws IOException
      */
     public static void encode(String content, String filepath) throws WriterException, IOException {
         int width = 100;
@@ -73,10 +71,6 @@ public class QRCodeUtils {
 
     /***
      * 解析二维码
-     * @param filepath
-     * @return
-     * @throws IOException
-     * @throws NotFoundException
      */
     public static String decode(String filepath) throws IOException, NotFoundException {
         BufferedImage bufferedImage = ImageIO.read(new FileInputStream(filepath));
@@ -89,6 +83,12 @@ public class QRCodeUtils {
         return result.getText();
     }
 
+    /**
+     * 生成一个二维码图片
+     *
+     * @param content         二维码文本内容
+     * @param deleteWhiteSide 是否除去白边  (缩放二维码)
+     */
     public static BufferedImage createImage(String content, boolean deleteWhiteSide) {
         Hashtable<EncodeHintType, Object> hints = new Hashtable<>();
         hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H); //设置容错率默认为最高
@@ -102,7 +102,7 @@ public class QRCodeUtils {
         } catch (WriterException e) {
             e.printStackTrace();
         }
-        int width = bitMatrix.getWidth();
+        int width = Objects.requireNonNull(bitMatrix).getWidth();
         int height = bitMatrix.getHeight();
         BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
         for (int x = 0; x < width; x++) {
@@ -110,7 +110,8 @@ public class QRCodeUtils {
                 image.setRGB(x, y, bitMatrix.get(x, y) ? 0xFF000000 : 0xFFFFFFFF);
             }
         }
-        return image;
+        // resize for deleting white side.
+        return deleteWhiteSide ? toBufferedImage(image.getScaledInstance(QRCODE_SIZE, QRCODE_SIZE, Image.SCALE_SMOOTH)) : image;
     }
 
     /**
@@ -119,7 +120,6 @@ public class QRCodeUtils {
      * @param source       二维码图片
      * @param logoPath     LOGO图片地址
      * @param needCompress 是否压缩
-     * @throws Exception
      */
     public static void insertImage(BufferedImage source, InputStream logoPath, boolean needCompress) {
         Image src = null;
@@ -128,7 +128,7 @@ public class QRCodeUtils {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        int width = src.getWidth(null);
+        int width = Objects.requireNonNull(src).getWidth(null);
         int height = src.getHeight(null);
         if (needCompress) {
             // 压缩LOGO
@@ -157,6 +157,9 @@ public class QRCodeUtils {
         graph.dispose();
     }
 
+    /**
+     * 将二维码部分复制出来以达到出去白边的效果，但是图片会size变小。
+     */
     private static BitMatrix deleteWhite(BitMatrix matrix) {
         int[] rec = matrix.getEnclosingRectangle();
         int resWidth = rec[2] + 1;
@@ -171,5 +174,59 @@ public class QRCodeUtils {
             }
         }
         return resMatrix;
+    }
+
+    /**
+     * Image -> bufferedImage
+     */
+    public static BufferedImage toBufferedImage(Image image) {
+        if (image instanceof BufferedImage) {
+            return (BufferedImage) image;
+        }
+
+        // This code ensures that all the pixels in the image are loaded
+        image = new ImageIcon(image).getImage();
+
+        // Determine if the image has transparent pixels; for this method's
+        // implementation, see e661 Determining If an Image Has Transparent Pixels
+        //boolean hasAlpha = hasAlpha(image);
+
+        // Create a buffered image with a format that's compatible with the screen
+        BufferedImage bimage = null;
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        try {
+            // Determine the type of transparency of the new buffered image
+            int transparency = Transparency.OPAQUE;
+	       /* if (hasAlpha) {
+	         transparency = Transparency.BITMASK;
+	         }*/
+
+            // Create the buffered image
+            GraphicsDevice gs = ge.getDefaultScreenDevice();
+            GraphicsConfiguration gc = gs.getDefaultConfiguration();
+            bimage = gc.createCompatibleImage(
+                image.getWidth(null), image.getHeight(null), transparency);
+        } catch (HeadlessException e) {
+            // The system does not have a screen
+        }
+
+        if (bimage == null) {
+            // Create a buffered image using the default color model
+            int type = BufferedImage.TYPE_INT_RGB;
+            //int type = BufferedImage.TYPE_3BYTE_BGR;//by wang
+	        /*if (hasAlpha) {
+	         type = BufferedImage.TYPE_INT_ARGB;
+	         }*/
+            bimage = new BufferedImage(image.getWidth(null), image.getHeight(null), type);
+        }
+
+        // Copy image to buffered image
+        Graphics g = bimage.createGraphics();
+
+        // Paint the image onto the buffered image
+        g.drawImage(image, 0, 0, null);
+        g.dispose();
+
+        return bimage;
     }
 }
