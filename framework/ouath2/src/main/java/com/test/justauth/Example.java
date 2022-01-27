@@ -1,6 +1,5 @@
 package com.test.justauth;
 
-import cn.hutool.core.lang.Assert;
 import me.zhyd.oauth.AuthRequestBuilder;
 import me.zhyd.oauth.config.AuthConfig;
 import me.zhyd.oauth.model.AuthCallback;
@@ -12,7 +11,8 @@ import me.zhyd.oauth.utils.AuthStateUtils;
  * @author simple
  */
 public class Example {
-public static final AuthCallback callback = AuthCallback.builder().build();
+    public static final AuthCallback callback = AuthCallback.builder().build();
+
     public static void auth1() {
         //普通方式
         // 创建授权request
@@ -71,7 +71,7 @@ public static final AuthCallback callback = AuthCallback.builder().build();
         // Builder 方式支持自定义的平台
         AuthRequest authRequest = AuthRequestBuilder.builder()
             // 关键点：将自定义实现的 AuthSource 配置上
-            .extendSource(AuthExtendSource.values())
+            .extendSource(null)
             // source 对应 AuthExtendSource 中的枚举 name
             .source("other")
             // ... 其他内容不变，参考上面的示例
