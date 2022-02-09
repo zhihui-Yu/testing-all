@@ -1,0 +1,7 @@
+server:
+  port: 80
+
+github:
+  app:
+    client-id: "Iv1.4b6ba24ebd98b055"
+    client-secret: "1c35fcdfa7f9a22296328dc92dbdc3d8aec2d413"
