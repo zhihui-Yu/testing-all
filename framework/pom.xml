@@ -28,6 +28,7 @@
         <module>guava</module>
         <module>QRcode</module>
         <module>ouath2</module>
-        <module>verx</module>
+        <module>vertx</module>
+        <module>flexmark</module>
     </modules>
 </project>
