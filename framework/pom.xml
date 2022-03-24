@@ -15,6 +15,7 @@
     <properties>
         <maven.compiler.source>16</maven.compiler.source>
         <maven.compiler.target>16</maven.compiler.target>
+        <springboot.version>2.4.5</springboot.version>
     </properties>
 
     <modules>
@@ -30,5 +31,7 @@
         <module>ouath2</module>
         <module>vertx</module>
         <module>flexmark</module>
+        <module>springboot-cache</module>
+        <module>springboot-scheduler</module>
     </modules>
 </project>
