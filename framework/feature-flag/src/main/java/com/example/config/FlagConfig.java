@@ -18,9 +18,7 @@ import java.util.concurrent.ExecutionException;
 @Configuration
 public class FlagConfig {
     public static void main(String[] args) throws ExecutionException, InterruptedException {
-        /**
-         * 内部有个子线程去执行获取和更新操作。
-         */
+
         // Initialize container class that we created earlier
         Flags flags = new Flags();
         Thread thread = new Thread(() -> {
@@ -41,6 +39,10 @@ public class FlagConfig {
                         }
                     }
                 }).build();
+
+                /**
+                 * 内部有个子线程去执行获取和更新操作。
+                 */
                 Rox.setup("624d4dc812463094933f2593", options).get();
             } catch (InterruptedException e) {
                 e.printStackTrace();
