@@ -21,6 +21,7 @@
         <module>es</module>
         <module>mongo</module>
         <module>rabbitmq</module>
+        <module>rocketmq</module>
         <module>redis</module>
         <module>twilio</module>
         <module>kafka</module>
