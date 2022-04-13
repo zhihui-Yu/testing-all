@@ -23,7 +23,12 @@ public class ProducerApplication implements CommandLineRunner {
         SpringApplication.run(ProducerApplication.class, args);
     }
 
-    public void run(String... args) throws Exception {
+    /**
+     * rocketmq 的 topic-queue 就像 kafka的 topic-partition, 用来保证消费的顺序性。
+     * 不同的是，rocketmq，可以在producer和customer实现queue的自定义选择器。 或者配置服务发送消息和消费消息是同步的
+     * 如果使用 syncSendOrderly，就是走hash key的方式发送到相对的queue中
+     */
+    public void run(String... args) {
         //send message synchronously
         rocketMQTemplate.convertAndSend("test-topic-1", "Hello, World!");
         //send spring message
@@ -44,14 +49,14 @@ public class ProducerApplication implements CommandLineRunner {
         //Send messages orderly
         rocketMQTemplate.syncSendOrderly("orderly_topic", MessageBuilder.withPayload("Hello, World").build(), "hashkey");
 
+        // test order
+        for (int i = 0; i < 100; i++) {
+            int finalI = i;
+            new Thread(() -> {
+                rocketMQTemplate.syncSendOrderly("orderly_topic", MessageBuilder.withPayload(String.format("Hello, World-%s", finalI)).build(), String.format("orderly_topic-%s", finalI));
+            }).start();
+        }
+
         //rocketMQTemplate.destroy(); // notes:  once rocketMQTemplate be destroyed, you can not send any message again with this rocketMQTemplate
-    }
-
-    @Data
-    @AllArgsConstructor
-    public class OrderPaidEvent implements Serializable {
-        private String orderId;
-
-        private BigDecimal paidMoney;
     }
 }

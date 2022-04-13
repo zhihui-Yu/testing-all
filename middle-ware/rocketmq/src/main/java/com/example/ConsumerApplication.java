@@ -17,18 +17,27 @@ public class ConsumerApplication{
     @Slf4j
     @Service
     @RocketMQMessageListener(topic = "test-topic-1", consumerGroup = "my-consumer_test-topic-1")
-    public class MyConsumer1 implements RocketMQListener<String> {
+    public static class MyConsumer1 implements RocketMQListener<String> {
         public void onMessage(String message) {
-            log.info("received message: {}", message);
+            log.info("received message from test-topic-1: {}", message);
         }
     }
 
     @Slf4j
     @Service
     @RocketMQMessageListener(topic = "test-topic-2", consumerGroup = "my-consumer_test-topic-2")
-    public class MyConsumer2 implements RocketMQListener<ProducerApplication.OrderPaidEvent>{
-        public void onMessage(ProducerApplication.OrderPaidEvent orderPaidEvent) {
-            log.info("received orderPaidEvent: {}", orderPaidEvent);
+    public static class MyConsumer2 implements RocketMQListener<OrderPaidEvent>{
+        public void onMessage(OrderPaidEvent orderPaidEvent) {
+            log.info("received orderPaidEvent from test-topic-2 : {}", orderPaidEvent);
+        }
+    }
+
+    @Slf4j
+    @Service
+    @RocketMQMessageListener(topic = "orderly_topic", consumerGroup = "my-consumer_test-topic-3")
+    public static class MyConsumer3 implements RocketMQListener<String>{
+        public void onMessage(String msg) {
+            log.info("received msg form orderly_topic: {}", msg);
         }
     }
 }
