@@ -1,11 +1,13 @@
 package com.example.repository;
 
 import com.example.domain.User;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
 
 /**
  * @author simple
  */
-public interface UserRepository extends CrudRepository<User, Long> {
+@Repository
+public interface UserRepository extends MongoRepository<User, Long> {
 
 }
