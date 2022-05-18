@@ -1,0 +1,2 @@
+com.spi.test.api.impl.AliPaymentService
+com.spi.test.api.impl.WXPaymentService
