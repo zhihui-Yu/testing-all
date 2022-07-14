@@ -35,5 +35,7 @@
         <module>springboot-scheduler</module>
         <module>feature-flag</module>
         <module>spi</module>
+        <module>jwt</module>
+        <module>zendesk</module>
     </modules>
 </project>
