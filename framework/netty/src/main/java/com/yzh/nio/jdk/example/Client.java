@@ -16,6 +16,10 @@ import java.util.Set;
  */
 public class Client {
 
+    public static void main(String[] args) throws IOException {
+        System.out.println("Client started....");
+        new Client().start();
+    }
     ByteBuffer writeBuffer = ByteBuffer.allocate(1024);
     ByteBuffer readBuffer = ByteBuffer.allocate(1024);
 
@@ -78,10 +82,5 @@ public class Client {
                 }
             }
         }
-    }
-
-    public static void main(String[] args) throws IOException {
-        System.out.println("Client started....");
-        new Client().start();
     }
 }
