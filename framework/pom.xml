@@ -37,5 +37,6 @@
         <module>spi</module>
         <module>jwt</module>
         <module>zendesk</module>
+        <module>undertow</module>
     </modules>
 </project>
