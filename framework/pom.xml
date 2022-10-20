@@ -38,5 +38,7 @@
         <module>jwt</module>
         <module>zendesk</module>
         <module>undertow</module>
+        <module>spark-core</module>
+        <module>spark-core</module>
     </modules>
 </project>
