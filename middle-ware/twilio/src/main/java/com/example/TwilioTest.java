@@ -13,21 +13,20 @@ import java.net.URISyntaxException;
  */
 public class TwilioTest {
     // pls use yourself
-    private static final String accountSid = "AC3008b00658e27aaf641ddfc88d98e84e"; // Your Account SID from www.twilio.com/user/account
-    private static final String authToken = "3e1f1986581ad357b1bd679628ded0fa"; // Your Auth Token from www.twilio.com/user/account
+    private static final String accountSid = "sid"; // Your Account SID from www.twilio.com/user/account
+    private static final String authToken = "token"; // Your Auth Token from www.twilio.com/user/account
 
     public void contextLoads() {
         Twilio.init(accountSid, authToken);
 
         Message message = Message.creator(
-            new PhoneNumber("+8615659988137"),  // To number ,Phone number with area code
-            new PhoneNumber("+18322205386"),  // From number
+            new PhoneNumber("+86phone"),  // To number ,Phone number with area code
+            new PhoneNumber("+1phone"),  // From number
             " Simple's test now."                   // SMS body
         ).create();
 
         if (message.getSid() != null && !message.getSid().isEmpty()) {
             System.out.println(message.getSid());
-
         }
 
     }
