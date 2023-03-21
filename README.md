@@ -26,6 +26,7 @@ testing-all
 │    ├─ springboot-scheduler                    # springboot functions
 │    ├─ undertow                                # web server
 │    ├─ vertx                                   # web server
+│    ├─ vlcj                                    # video player frame
 │    └─ zendesk                                 # third party sdk using
 ├─ middle-ware # how to use those
 │    ├─ es                                      # es sdk demo + spring-es

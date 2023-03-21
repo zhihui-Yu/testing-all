@@ -1,0 +1,1 @@
+this resource is only support win-64bit
