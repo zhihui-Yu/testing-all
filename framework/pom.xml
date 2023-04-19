@@ -41,5 +41,6 @@
         <module>spark-core</module>
         <module>spark-core</module>
         <module>vlcj</module>
+        <module>springboot-webflux</module>
     </modules>
 </project>
