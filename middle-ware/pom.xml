@@ -18,6 +18,7 @@
     </properties>
 
     <modules>
+        <module>canal</module>
         <module>es</module>
         <module>mongo</module>
         <module>rabbitmq</module>
