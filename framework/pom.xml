@@ -42,5 +42,7 @@
         <module>spark-core</module>
         <module>vlcj</module>
         <module>springboot-webflux</module>
+        <module>milvus</module>
+        <module>milvus</module>
     </modules>
 </project>
