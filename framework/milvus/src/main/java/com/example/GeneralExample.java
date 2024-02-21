@@ -50,7 +50,7 @@ public class GeneralExample {
         ConnectParam connectParam = ConnectParam.newBuilder()
             .withHost("localhost")
             .withPort(19530)
-            .withAuthorization("root", "Milvus")
+//            .withAuthorization("root", "Milvus")
             .build();
         milvusClient = new MilvusServiceClient(connectParam).withRetry(3);
     }
